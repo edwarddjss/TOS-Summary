@@ -1,36 +1,28 @@
-# TOS Analyzer - AI-Powered Chrome Extension
+# TOS Analyzer
 
-A privacy-first Chrome extension that automatically detects and analyzes Terms of Service and Privacy Policies using local AI processing.
+A Chrome extension that automatically detects and analyzes Terms of Service and Privacy Policies using local AI processing.
+
+## Overview
+
+TOS Analyzer helps users understand the privacy implications and risks associated with terms of service agreements they encounter online. All analysis is performed locally on the user's device to ensure privacy.
 
 ## Features
 
-- 🔍 **Automatic TOS Detection** - Finds TOS/Privacy Policy content in popups, modals, links, and embedded text
-- 🤖 **Local AI Analysis** - Analyzes terms using Phi-3 Mini model running entirely on your device
-- 🛡️ **Privacy-First** - No data ever leaves your device; all processing is local
-- 📊 **Risk Assessment** - Provides clear risk ratings and actionable recommendations
-- ♿ **Accessible Design** - Full keyboard navigation and screen reader support
-- 💰 **Completely Free** - Open source with optional donations to support development
-
-## Privacy & Security
-
-- ✅ All analysis performed locally on your device
-- ✅ No external API calls or data transmission
-- ✅ Minimal Chrome permissions required
-- ✅ Open source code available for audit
-- ✅ GDPR and CCPA compliant
+- Automatic detection of TOS and Privacy Policy content
+- Local AI-powered risk assessment using Transformers.js
+- Real-time analysis of terms in popups, modals, and embedded content
+- Risk categorization across multiple dimensions
+- Privacy-focused design with no external data transmission
+- Accessible interface with keyboard navigation support
 
 ## Installation
 
-### From Chrome Web Store (Coming Soon)
-1. Visit the Chrome Web Store
-2. Search for "TOS Analyzer"
-3. Click "Add to Chrome"
+### Development Build
 
-### From Source (Development)
-1. Clone this repository:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-org/tos-analyzer-extension.git
-   cd tos-analyzer-extension
+   git clone https://github.com/edwarddjss/TOS-Summary.git
+   cd TOS-Summary
    ```
 
 2. Install dependencies:
@@ -44,147 +36,111 @@ A privacy-first Chrome extension that automatically detects and analyzes Terms o
    ```
 
 4. Load in Chrome:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Enable "Developer mode" in the top right
+   - Navigate to `chrome://extensions/`
+   - Enable "Developer mode"
    - Click "Load unpacked" and select the `dist` folder
 
 ## Usage
 
-### Automatic Analysis
-- The extension automatically scans for Terms of Service when you visit websites
-- Risk notifications appear for high-risk terms (configurable in settings)
-- Click the extension icon to view detailed analysis
+The extension automatically scans web pages for terms of service content. Click the extension icon to view analysis results, or access settings through the options page.
 
-### Manual Analysis
-- Click the extension icon on any page
-- Click "Scan Again" to manually trigger analysis
-- View risk assessment, key concerns, and recommendations
+### Manual Scanning
 
-### Settings
-- Right-click the extension icon and select "Options"
-- Configure automatic analysis, notifications, and accessibility features
-- Export/import analysis data for backup
+Use the "Scan Again" button in the popup to manually trigger analysis on the current page.
 
-## How It Works
+### Configuration
 
-1. **Detection**: Scans web pages for TOS/Privacy Policy content using multiple detection strategies
-2. **Extraction**: Extracts full text content from modals, links, and embedded sections
-3. **Analysis**: Processes content locally using rule-based analysis (Phi-3 Mini integration planned)
-4. **Assessment**: Generates risk ratings across six categories:
-   - Data Collection
-   - Data Sharing
-   - User Rights
-   - Account Termination
-   - Liability & Warranties
-   - Changes to Terms
+Access extension settings by right-clicking the icon and selecting "Options" to configure:
+- Automatic analysis preferences
+- Notification thresholds
+- Accessibility options
+
+## Architecture
+
+The extension uses a modular architecture with separate components for:
+
+- **Content Scripts**: Detect and extract TOS content from web pages
+- **Background Service Worker**: Coordinate analysis and manage extension state  
+- **AI Worker**: Perform local analysis using machine learning models
+- **Popup Interface**: Display results and user controls
+- **Options Page**: Extension configuration
+
+### Risk Assessment Categories
+
+Analysis covers six key areas:
+- Data Collection
+- Data Sharing  
+- User Rights
+- Account Termination
+- Liability & Warranties
+- Changes to Terms
 
 ## Development
 
 ### Prerequisites
+
 - Node.js 18+
-- pnpm 8+
-- Chrome/Chromium browser
+- pnpm package manager
+- Chrome or Chromium browser
 
-### Setup
+### Build Commands
+
 ```bash
-# Clone repository
-git clone https://github.com/your-org/tos-analyzer-extension.git
-cd tos-analyzer-extension
-
-# Install dependencies
-pnpm install
-
-# Start development server
+# Development build with watch mode
 pnpm run dev
 
-# Build for production
+# Production build
 pnpm run build
 
-# Run tests
-pnpm test
-
-# Lint code
+# Run linter
 pnpm run lint
+
+# Format code
+pnpm run format
 ```
 
 ### Project Structure
+
 ```
 src/
-├── background/      # Service worker and background scripts
-├── content/         # Content scripts for web page interaction
-├── popup/          # Extension popup UI
-├── options/        # Options/settings page
-├── ai/             # AI worker for local analysis
-├── utils/          # Shared utilities and helpers
-├── types/          # TypeScript type definitions
-├── styles/         # CSS stylesheets
-└── icons/          # Extension icons
+├── ai/              # AI worker and analysis logic
+├── background/      # Service worker implementation
+├── content/         # Content script for page interaction
+├── popup/           # Extension popup interface
+├── options/         # Settings and configuration page
+├── utils/           # Shared utilities and helpers
+├── types/           # TypeScript type definitions
+├── styles/          # CSS stylesheets
+└── icons/           # Extension icons and assets
 ```
 
-### Key Files
-- `manifest.json` - Chrome extension manifest
-- `webpack.config.js` - Build configuration
-- `src/types/index.ts` - Core type definitions
-- `src/utils/tos-detector.ts` - TOS detection logic
-- `src/ai/ai-worker.ts` - Local AI analysis worker
+## Technical Details
+
+- Built with TypeScript and Webpack
+- Uses Transformers.js for local machine learning inference
+- Implements Chrome Extension Manifest V3
+- All processing performed client-side for privacy
+- Optimized bundle sizes for performance
+
+## Privacy
+
+This extension is designed with privacy as a core principle:
+
+- No data transmission to external servers
+- All analysis performed locally
+- Minimal required permissions
+- Open source for transparency and audit
+
+See [PRIVACY.md](PRIVACY.md) for detailed privacy information.
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+Contributions are welcome. Please check the issue tracker for areas where help is needed.
 
-### Areas for Contribution
-- [ ] Additional TOS detection patterns
-- [ ] Improved risk assessment rules
-- [ ] UI/UX enhancements
-- [ ] Accessibility improvements
-- [ ] Documentation and translations
-- [ ] Test coverage expansion
+## License
 
-## Roadmap
+MIT License. See [LICENSE](LICENSE) for details.
 
-### v1.1
-- [ ] Phi-3 Mini model integration
-- [ ] Enhanced detection for SPAs
-- [ ] Browser extension for Firefox
-- [ ] Advanced filtering options
+## Disclaimer
 
-### v1.2
-- [ ] Multiple language support
-- [ ] Custom risk categories
-- [ ] Analysis history dashboard
-- [ ] Export to PDF reports
-
-### v2.0
-- [ ] Real-time TOS change monitoring
-- [ ] Company database integration
-- [ ] Advanced ML models
-- [ ] Enterprise features
-
-## Support
-
-- 📧 Email: support@tosanalyzer.com
-- 🐛 Issues: [GitHub Issues](https://github.com/your-org/tos-analyzer-extension/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/your-org/tos-analyzer-extension/discussions)
-- ☕ Donate: [Buy Me a Coffee](https://buymeacoffee.com/tosanalyzer)
-
-## Legal
-
-### Disclaimer
-This extension provides analysis for informational purposes only and does not constitute legal advice. Always consult with qualified legal professionals for legal matters.
-
-### License
-MIT License - see [LICENSE](LICENSE) file for details.
-
-### Privacy Policy
-See [PRIVACY.md](PRIVACY.md) for our complete privacy policy.
-
-## Acknowledgments
-
-- Built with [TypeScript](https://www.typescriptlang.org/)
-- AI processing via [ONNX Runtime](https://onnxruntime.ai/)
-- Icons from [Heroicons](https://heroicons.com/)
-- Inspired by privacy advocacy organizations worldwide
-
----
-
-Made with ❤️ for privacy and transparency. 
+This tool provides analysis for informational purposes only and does not constitute legal advice. Users should consult qualified legal professionals for legal matters. 
