@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOS Analyzer - Settings</title>
+  <link rel="stylesheet" href="styles/options.css">
+</head>
+<body>
+  <div class="options-container">
+    <header class="options-header">
+      <div class="header-content">
+        <img src="/icons/icon48.png" alt="TOS Analyzer" class="header-icon">
+        <div>
+          <h1 class="header-title">TOS Analyzer Settings</h1>
+          <p class="header-subtitle">Configure your privacy analysis preferences</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="options-main">
+      <form id="settingsForm" class="settings-form">
+        <!-- Analysis Settings -->
+        <section class="settings-section">
+          <h2 class="section-title">Analysis Settings</h2>
+          
+          <div class="setting-item">
+            <label class="setting-label">
+              <input type="checkbox" id="autoAnalyze" name="autoAnalyze">
+              <span class="checkmark"></span>
+              <div class="setting-info">
+                <span class="setting-name">Automatic Analysis</span>
+                <span class="setting-description">Automatically scan for and analyze Terms of Service on websites you visit</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label class="setting-label">
+              <input type="checkbox" id="showNotifications" name="showNotifications">
+              <span class="checkmark"></span>
+              <div class="setting-info">
+                <span class="setting-name">Risk Notifications</span>
+                <span class="setting-description">Show notifications when high-risk terms are detected</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label for="notificationThreshold" class="setting-name">Notification Threshold</label>
+            <select id="notificationThreshold" name="notificationThreshold" class="setting-select">
+              <option value="medium">Medium risk and above</option>
+              <option value="high">High risk and above</option>
+              <option value="critical">Critical risk only</option>
+            </select>
+            <span class="setting-description">Minimum risk level required to show notifications</span>
+          </div>
+        </section>
+
+        <!-- Accessibility Settings -->
+        <section class="settings-section">
+          <h2 class="section-title">Accessibility</h2>
+          
+          <div class="setting-item">
+            <label class="setting-label">
+              <input type="checkbox" id="enableAccessibility" name="enableAccessibility">
+              <span class="checkmark"></span>
+              <div class="setting-info">
+                <span class="setting-name">Enhanced Accessibility</span>
+                <span class="setting-description">Enable screen reader announcements and enhanced keyboard navigation</span>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- Data Management -->
+        <section class="settings-section">
+          <h2 class="section-title">Data Management</h2>
+          
+          <div class="setting-item">
+            <button type="button" id="exportDataBtn" class="btn btn-secondary">
+              Export Analysis Data
+            </button>
+            <span class="setting-description">Download all your analysis data as a JSON file</span>
+          </div>
+
+          <div class="setting-item">
+            <button type="button" id="importDataBtn" class="btn btn-secondary">
+              Import Analysis Data
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;">
+            <span class="setting-description">Import previously exported analysis data</span>
+          </div>
+
+          <div class="setting-item">
+            <button type="button" id="clearDataBtn" class="btn btn-danger">
+              Clear All Data
+            </button>
+            <span class="setting-description">Remove all stored analysis data and reset settings</span>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="settings-section">
+          <h2 class="section-title">About</h2>
+          
+          <div class="about-content">
+            <div class="about-item">
+              <span class="about-label">Version:</span>
+              <span id="versionNumber">1.0.0</span>
+            </div>
+            
+            <div class="about-item">
+              <span class="about-label">Privacy:</span>
+              <span>All analysis is performed locally on your device. No data is sent to external servers.</span>
+            </div>
+            
+            <div class="about-item">
+              <span class="about-label">Legal Disclaimer:</span>
+              <span>This analysis is for informational purposes only and does not constitute legal advice.</span>
+            </div>
+            
+            <div class="about-links">
+              <a href="#" id="privacyPolicyLink" class="about-link">Privacy Policy</a>
+              <a href="#" id="supportLink" class="about-link">Support</a>
+              <a href="#" id="githubLink" class="about-link">Source Code</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Support Section -->
+        <section class="settings-section">
+          <h2 class="section-title">Support This Project</h2>
+          
+          <div class="support-content">
+            <p class="support-text">
+              TOS Analyzer is completely free and respects your privacy. If you find it useful, 
+              consider supporting its development.
+            </p>
+            
+            <div class="support-actions">
+              <button type="button" id="donateBtn" class="btn btn-primary">
+                ☕ Buy Me a Coffee
+              </button>
+              <button type="button" id="dismissDonationBtn" class="btn btn-outline">
+                Don't Show Again
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Save Button -->
+        <div class="form-actions">
+          <button type="submit" id="saveBtn" class="btn btn-primary btn-large">
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Status Messages -->
+    <div id="statusMessage" class="status-message" style="display: none;">
+      <span id="statusText"></span>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h3 id="confirmTitle">Confirm Action</h3>
+      <p id="confirmMessage">Are you sure you want to proceed?</p>
+      <div class="modal-actions">
+        <button id="confirmYes" class="btn btn-danger">Yes</button>
+        <button id="confirmNo" class="btn btn-outline">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html> 

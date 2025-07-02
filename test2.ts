@@ -1,0 +1,1 @@
+let level: 'low' | 'medium' | 'high' = 'low'; switch(level){case 'high': console.log('H');break;}

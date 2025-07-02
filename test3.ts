@@ -1,0 +1,1 @@
+let level: 'low' | 'medium' | 'high' = 'low'; level='high';

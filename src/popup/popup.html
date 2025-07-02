@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOS Analyzer</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="header-content">
+        <img src="/icons/icon32.png" alt="TOS Analyzer" class="header-icon">
+        <div class="header-text">
+          <h1 class="header-title">TOS Analyzer</h1>
+          <p class="website-name" id="websiteName">Loading...</p>
+        </div>
+        <button id="settingsBtn" class="header-action" aria-label="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V12a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="popup-main">
+      <!-- Loading State -->
+      <div id="loadingState" class="state-container">
+        <div class="loading-spinner"></div>
+        <p class="state-message">Scanning for Terms of Service...</p>
+      </div>
+
+      <!-- No Analysis State -->
+      <div id="noAnalysisState" class="state-container" style="display: none;">
+        <div class="state-icon">📄</div>
+        <h3 class="state-title">No Terms Found</h3>
+        <p class="state-message">No Terms of Service or Privacy Policy detected on this page.</p>
+        <button id="manualScanBtn" class="btn btn-primary">Scan Again</button>
+      </div>
+
+      <!-- Analysis Results -->
+      <div id="analysisResults" class="analysis-container" style="display: none;">
+        <!-- Risk Overview -->
+        <div class="risk-overview">
+          <div class="risk-badge" id="riskBadge">
+            <span class="risk-level" id="riskLevel">MEDIUM</span>
+            <span class="risk-label">Risk Level</span>
+          </div>
+          <div class="analysis-info">
+            <h3 id="documentTitle">Privacy Policy</h3>
+            <p class="analysis-meta">
+              <span id="analysisDate">Analyzed 5 minutes ago</span>
+              <span class="meta-separator">•</span>
+              <span id="processingTime">1.2s processing</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-section">
+          <p id="analysisSummary" class="summary-text">
+            Moderate privacy and terms concerns. Some data collection and sharing occurs, but with reasonable protections.
+          </p>
+        </div>
+
+        <!-- Key Points -->
+        <div class="key-points-section">
+          <h4 class="section-title">Key Concerns</h4>
+          <ul id="keyPointsList" class="key-points-list">
+            <!-- Dynamic content -->
+          </ul>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="recommendations-section">
+          <h4 class="section-title">Recommendations</h4>
+          <ul id="recommendationsList" class="recommendations-list">
+            <!-- Dynamic content -->
+          </ul>
+        </div>
+
+        <!-- Detailed Categories -->
+        <div class="categories-section">
+          <h4 class="section-title">
+            <span>Risk Categories</span>
+            <button id="toggleCategories" class="toggle-btn" aria-label="Toggle categories">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </button>
+          </h4>
+          <div id="categoriesContent" class="categories-content">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-section">
+          <button id="exportBtn" class="btn btn-secondary">Export Analysis</button>
+          <button id="clearBtn" class="btn btn-outline">Clear Analysis</button>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="state-container" style="display: none;">
+        <div class="state-icon">⚠️</div>
+        <h3 class="state-title">Analysis Failed</h3>
+        <p class="state-message" id="errorMessage">Unable to analyze the terms of service.</p>
+        <button id="retryBtn" class="btn btn-primary">Try Again</button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <div class="footer-content">
+        <div class="disclaimer">
+          <small>Analysis is informational only and not legal advice.</small>
+        </div>
+        <div class="donation-section" id="donationSection">
+          <button id="donateBtn" class="donate-btn">
+            <span>☕</span>
+            <span>Support this project</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Accessibility announcements -->
+  <div id="announcements" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 

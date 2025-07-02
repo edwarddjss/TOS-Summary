@@ -1,0 +1,98 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# PROJECT SPECIFICATION: AI-Powered Chrome Extension for Local TOS Analysis
+
+## Purpose
+
+Design, build, test, and launch a Chrome extension that detects Terms of Service (TOS) or privacy agreements on any website, extracts the full text, analyzes it fully locally using the open-source Phi-3 Mini (3.8B, 128K context window) language model, and presents users with a clear, actionable risk summary. All processing must remain on the user’s device; no paid APIs or external servers may be used. The extension must be completely free, with an optional, non-intrusive donation button for voluntary user support.
+
+---
+
+## Functional Requirements
+
+- **TOS Detection:** Automatically detects TOS/privacy agreements in popups, checkboxes, links, modals, and dynamic elements across websites.
+- **Text Extraction:** Reliably extracts full agreement text, supporting static and dynamic/SPAs via DOM parsing, MutationObserver, and AJAX/fetch intercept.
+- **Local AI Analysis:** Uses Phi-3 Mini for in-browser TOS analysis and summarization, with no data leaving the device.
+- **Risk Summary:** Displays clear, actionable, and accessible notifications or panels highlighting risks or important clauses.
+- **Donation Button:** Offers a non-intrusive, polite “Support this project” donation button within the UI and options page; never blocks or nags users.
+- **Privacy:** Never sends any extracted or user data off-device.
+- **Accessibility:** Adheres to accessibility best practices for color, contrast, keyboard navigation, and screen readers.
+
+---
+
+## Non-Functional Requirements
+
+- **Performance:** Fast response and minimal CPU/RAM impact on typical user hardware.
+- **Compatibility:** Fully supports Manifest V3 and the latest stable Chrome browser.
+- **Security:** No elevation of privileges or risk of privilege escalation.
+- **Compliance:** Meets Chrome Web Store, GDPR, and CCPA privacy requirements.
+- **User Trust:** Clearly communicates privacy, limitations, and legal disclaimers (not legal advice).
+
+---
+
+## Architecture & Technical Approach
+
+- **Chrome Extension:** Manifest V3; uses minimum required permissions for maximum trust.
+- **Content/Background Scripts:** Modular structure for detection, extraction, inference, and UI.
+- **Model Integration:** Quantize and load Phi-3 Mini using WASM/WebGPU via phi-3.js, llama.cpp WASM, or equivalent.
+- **TOS Chunking:** Efficiently preprocesses and chunks large agreements to fit model context window.
+- **UI Design:** Non-intrusive notifications; persistent but subtle donation/support button.
+- **Documentation:** Inline code comments, user documentation, and clear changelog.
+
+---
+
+## Privacy, Security, and Legal
+
+- **All processing is local.**
+- **No data is ever sent to external servers or APIs.**
+- **Transparent privacy policy and user disclosures included in store listing and extension UI.**
+- **Prominent disclaimer that AI analysis is informational only and not legal advice.**
+
+---
+
+## Testing & QA
+
+- **Cross-browser and device testing.**
+- **Stress-test with large and atypical TOS documents.**
+- **UX, performance, and accessibility validation.**
+
+---
+
+## Packaging & Release
+
+- **All Chrome Web Store requirements met:** icons, screenshots, privacy policy, feature descriptions, and terms.
+- **Donation mechanism implemented via reputable platform (e.g., Buy Me a Coffee, OpenCollective) in a non-blocking, user-friendly way.**
+- **Beta release for feedback; rapid iteration based on user input.**
+
+---
+
+## Maintenance & Iteration
+
+- **Feedback channels available (e.g., email or GitHub Issues).**
+- **Updates and improvements prioritized based on user reports and compatibility.**
+- **No features or updates may ever introduce off-device data processing.**
+
+---
+
+## Out of Scope
+
+- No external API-based or cloud AI processing.
+- No upsell, paid tiers, or advertising.
+- No intrusive donation prompts.
+
+---
+
+## Guiding Principles
+
+- **Privacy-first**
+- **User-centric**
+- **Transparency**
+- **Simplicity**
+- **Sustainability via donations only**
+
+---
+
+*This document is the single source of truth for the extension’s design, implementation, and ongoing maintenance.*
